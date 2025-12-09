@@ -26,6 +26,7 @@ export default function TaskFormModal({
 		if (saving) return;
 
 		setSaving(true);
+
 		const payload = {
 			...form,
 			storyPoints: Number(form.storyPoints) || 0,
@@ -50,8 +51,18 @@ export default function TaskFormModal({
 
 			showSuccess("Saved");
 			onClose();
-		} catch {
-			showError("Save failed");
+		} catch (err) {
+			console.error("Failed to save task", err);
+
+			const message =
+				err?.response?.data?.message ||
+				err?.response?.data?.error ||
+				err?.response?.data?.errors?.[0] ||
+				JSON.stringify(err?.response?.data?.errors || "") ||
+				err?.message ||
+				"Save failed";
+
+			showError(message);
 		} finally {
 			setSaving(false);
 		}

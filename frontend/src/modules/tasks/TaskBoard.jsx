@@ -89,7 +89,7 @@ export default function TaskBoard({ sprintId }) {
 			</div>
 
 			<DragDropContext onDragEnd={onDragEnd}>
-				<div className="h-[50vh]">
+				<div className="h-[45vh]">
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 h-full">
 						{COLUMNS.map((col) => (
 							<TaskColumn

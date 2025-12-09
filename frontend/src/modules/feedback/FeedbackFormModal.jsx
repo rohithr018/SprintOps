@@ -25,17 +25,28 @@ export default function FeedbackFormModal({
 		if (saving) return;
 
 		setSaving(true);
+
 		try {
 			if (isEdit) {
 				await feedbackService.updateFeedback(sprintId, feedback._id, form);
 			} else {
 				await feedbackService.createFeedback(sprintId, form);
 			}
+
 			showSuccess("Saved");
 			onClose();
 		} catch (err) {
 			console.error("Failed to save feedback", err);
-			showError("Save failed");
+
+			const message =
+				err?.response?.data?.message ||
+				err?.response?.data?.error ||
+				err?.response?.data?.errors?.[0] ||
+				JSON.stringify(err?.response?.data?.errors || "") ||
+				err?.message ||
+				"Save failed";
+
+			showError(message);
 		} finally {
 			setSaving(false);
 		}

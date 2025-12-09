@@ -147,16 +147,7 @@ export default function Profile() {
 
 	// UI
 	return (
-		<div
-			className="
-				min-h-screen 
-				flex flex-col 
-				items-center 
-				justify-center 
-				bg-gradient-to-br from-white via-white to-slate-100
-				px-4
-			"
-		>
+		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-white to-slate-100px-4">
 			<div className="w-full max-w-5xl flex flex-col items-center gap-10">
 				<h1 className="text-3xl font-bold text-slate-900 text-center">
 					Profile Settings
@@ -165,13 +156,7 @@ export default function Profile() {
 				{/* --- TOP ROW: Two Equal Height Cards --- */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full items-stretch">
 					{/* ACCOUNT INFO */}
-					<section
-						className="
-						backdrop-blur-xl bg-white/50 border border-white/60 
-						shadow-xl rounded-2xl p-8 
-						h-full flex flex-col justify-center
-					"
-					>
+					<section className="backdrop-blur-xl bg-white/50 border border-white/60 shadow-xl rounded-2xl p-8 h-full flex-col justify-center">
 						<h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wide text-center mb-6">
 							Account Info
 						</h2>
@@ -186,11 +171,7 @@ export default function Profile() {
 									type="text"
 									value={name}
 									onChange={(e) => setName(e.target.value)}
-									className="
-										w-full rounded-lg border border-slate-300 
-										px-3 py-2.5 text-sm 
-										focus:ring-2 focus:ring-blue-500 outline-none
-									"
+									className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
 								/>
 							</div>
 
@@ -203,25 +184,19 @@ export default function Profile() {
 									type="email"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className="
-										w-full rounded-lg border border-slate-300 
-										px-3 py-2.5 text-sm 
-										focus:ring-2 focus:ring-blue-500 outline-none
-									"
+									className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
 								/>
 							</div>
 
 							<button
 								type="submit"
 								disabled={!isProfileChanged || savingProfile}
-								className={`
-									w-full py-2.5 rounded-lg text-sm font-medium text-white shadow-md transition
+								className={`w-full py-2.5 rounded-lg text-sm font-medium text-white shadow-md transition
 									${
 										!isProfileChanged || savingProfile
 											? "bg-blue-300 cursor-not-allowed"
 											: "bg-blue-600 hover:bg-blue-700"
-									}
-								`}
+									}`}
 							>
 								{savingProfile ? "Saving..." : "Save Changes"}
 							</button>
@@ -229,13 +204,7 @@ export default function Profile() {
 					</section>
 
 					{/* CHANGE PASSWORD */}
-					<section
-						className="
-						backdrop-blur-xl bg-white/50 border border-white/60 
-						shadow-xl rounded-2xl p-8 
-						h-full flex flex-col justify-center
-					"
-					>
+					<section className="bg-white/50 border border-white/60 shadow-xl rounded-2xl p-8 h-full flex flex-col justify-center">
 						<h2 className="text-sm font-semibold text-slate-900 uppercase tracking-wide text-center mb-6">
 							Change Password
 						</h2>
@@ -246,19 +215,18 @@ export default function Profile() {
 								<label className="block text-xs font-medium text-slate-600 mb-1">
 									New Password
 								</label>
+
 								<input
 									type={showPassword ? "text" : "password"}
 									value={newPassword}
 									onChange={(e) => setNewPassword(e.target.value)}
-									className="
-										w-full rounded-lg border border-slate-300 px-3 py-2.5 pr-10 text-sm
-										focus:ring-2 focus:ring-blue-500 outline-none
-									"
+									className="w-full rounded-lg border border-slate-300 px-3 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
 								/>
+
 								<button
 									type="button"
-									onClick={() => setShowPassword(!showPassword)}
-									className="absolute right-3 top-[32px] text-slate-500 hover:text-slate-700"
+									onClick={() => setShowPassword((v) => !v)}
+									className="absolute right-3 top-8 text-slate-500 hover:text-slate-700"
 								>
 									{showPassword ? <FiEyeOff /> : <FiEye />}
 								</button>
@@ -269,24 +237,27 @@ export default function Profile() {
 								<label className="block text-xs font-medium text-slate-600 mb-1">
 									Confirm Password
 								</label>
+
 								<input
 									type={showPassword ? "text" : "password"}
 									value={confirmPassword}
 									onChange={(e) => setConfirmPassword(e.target.value)}
-									className="
-										w-full rounded-lg border border-slate-300 px-3 py-2.5 pr-10 text-sm
-										focus:ring-2 focus:ring-blue-500 outline-none
-									"
+									className="w-full rounded-lg border border-slate-300 px-3 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
 								/>
+
+								<button
+									type="button"
+									onClick={() => setShowPassword((v) => !v)}
+									className="absolute right-3 top-[32px] text-slate-500 hover:text-slate-700"
+								>
+									{showPassword ? <FiEyeOff /> : <FiEye />}
+								</button>
 							</div>
 
 							<button
 								type="submit"
 								disabled={savingPassword}
-								className="
-									w-full bg-slate-800 text-white py-2.5 rounded-lg text-sm 
-									shadow-md hover:bg-slate-900 transition disabled:opacity-60
-								"
+								className="w-full bg-slate-800 text-white py-2.5 rounded-lg text-sm shadow-md hover:bg-slate-900 transition disabled:opacity-60"
 							>
 								{savingPassword ? "Updating..." : "Update Password"}
 							</button>

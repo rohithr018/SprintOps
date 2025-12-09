@@ -303,7 +303,6 @@ export default function Analytics() {
 								transition min-w-[170px] backdrop-blur-xl
 							"
 							>
-								<option value="">Choose sprint</option>
 								{sprints.map((s) => (
 									<option key={s._id} value={s._id}>
 										{s.name}

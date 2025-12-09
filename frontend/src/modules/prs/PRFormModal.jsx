@@ -35,11 +35,21 @@ export default function PRFormModal({ sprintId, pr = null, onClose }) {
 			} else {
 				await prService.createPR(sprintId, payload);
 			}
+
 			showSuccess("Saved");
 			onClose();
 		} catch (err) {
 			console.error("Failed to save PR", err);
-			showError("Save failed");
+
+			const message =
+				err?.response?.data?.message ||
+				err?.response?.data?.error ||
+				err?.response?.data?.errors?.[0] ||
+				JSON.stringify(err?.response?.data?.errors || "") ||
+				err?.message ||
+				"Save failed";
+
+			showError(message);
 		} finally {
 			setSaving(false);
 		}

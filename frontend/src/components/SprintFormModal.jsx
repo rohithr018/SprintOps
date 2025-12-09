@@ -209,7 +209,7 @@ export default function SprintFormModal({
 							disabled={submitting || (isEdit && !isDirty)}
 							className="px-4 py-2 bg-blue-600 text-white rounded-lg inline-flex items-center gap-2 disabled:opacity-60"
 						>
-							{submitting ? <Loading /> : isEdit ? "Update" : "Create"}
+							{submitting ? <Loading inline /> : isEdit ? "Update" : "Create"}
 						</button>
 					</div>
 				</form>

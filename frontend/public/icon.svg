@@ -1,0 +1,87 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="256"
+  height="256"
+  viewBox="0 0 256 256"
+  role="img"
+  aria-labelledby="sprintops-title sprintops-desc"
+>
+  <title id="sprintops-title">SprintOps Logo</title>
+  <desc id="sprintops-desc">S inside a circular ring, representing speed and iteration.</desc>
+
+  <defs>
+    <linearGradient id="soGrad" x1="32" y1="32" x2="224" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <style>
+      .brand{display:inline;}
+      .mono{display:none;}
+      .ring{stroke-width:18;stroke-linecap:round;stroke-linejoin:round;}
+      .grad-fill{fill:url(#soGrad);}
+      .grad-stroke{stroke:url(#soGrad);}
+    </style>
+  </defs>
+
+  <g class="brand">
+    <circle
+      cx="128" cy="128" r="96"
+      class="ring grad-stroke"
+      fill="none"
+      stroke="currentColor"
+    />
+
+    <!-- tightened S fully inside ring -->
+    <path
+      class="grad-fill"
+      fill="currentColor"
+      d="
+        M 168 80
+        C 148 64 118 66 100 82
+          90 92 92 108 106 120
+          124 134 152 138 168 152
+          182 164 184 182 170 198
+          154 216 128 218 108 214
+          90 210 78 200 74 194
+          88 210 112 222 136 222
+          158 222 180 212 190 196
+          200 182 196 162 178 148
+          158 132 132 124 114 116
+          96 108 94 94 106 84
+          124 70 150 70 168 80
+        Z
+      "
+    />
+  </g>
+
+  <g class="mono">
+    <circle
+      cx="128" cy="128" r="96"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      fill="currentColor"
+      d="
+        M 168 80
+        C 148 64 118 66 100 82
+          90 92 92 108 106 120
+          124 134 152 138 168 152
+          182 164 184 182 170 198
+          154 216 128 218 108 214
+          90 210 78 200 74 194
+          88 210 112 222 136 222
+          158 222 180 212 190 196
+          200 182 196 162 178 148
+          158 132 132 124 114 116
+          96 108 94 94 106 84
+          124 70 150 70 168 80
+        Z
+      "
+    />
+  </g>
+</svg>

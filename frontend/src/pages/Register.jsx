@@ -62,19 +62,24 @@ export default function Register() {
 	};
 
 	return (
-		<div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100 px-4 py-10">
+		<div
+			className="min-h-screen flex items-center justify-center 
+		bg-gradient-to-br from-white via-white to-slate-100 px-4"
+		>
 			<motion.div
 				initial={{ opacity: 0, y: 16 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.35 }}
-				className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 sm:p-10 border border-slate-200"
+				className="w-full max-w-md backdrop-blur-xl bg-white/50 
+				border border-white/60 shadow-xl rounded-2xl p-8 sm:p-10"
 			>
-				<header className="text-center mb-8">
-					<h1 className="text-3xl font-bold text-slate-900">
+				{/* HEADER */}
+				<header className="text-center mb-7">
+					<h1 className="text-3xl font-bold text-slate-900 tracking-tight">
 						Create your account
 					</h1>
 					<p className="text-sm text-slate-600 mt-1">
-						Join the platform & start tracking your work smarter
+						Join SprintOps & start tracking smarter
 					</p>
 				</header>
 
@@ -89,9 +94,10 @@ export default function Register() {
 							onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
 							placeholder="John Doe"
 							autoComplete="name"
-							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
-								errors.name ? "border-red-300" : "border-slate-300"
-							}`}
+							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 
+							placeholder:text-slate-400 focus:outline-none focus:ring-2 
+							focus:ring-blue-400 transition 
+							${errors.name ? "border-red-300" : "border-slate-300"}`}
 						/>
 						{errors.name && (
 							<p className="text-xs text-red-600 mt-1">{errors.name}</p>
@@ -111,9 +117,10 @@ export default function Register() {
 							placeholder="you@company.com"
 							autoComplete="email"
 							type="email"
-							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
-								errors.email ? "border-red-300" : "border-slate-300"
-							}`}
+							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 
+							placeholder:text-slate-400 focus:outline-none focus:ring-2 
+							focus:ring-blue-400 transition 
+							${errors.email ? "border-red-300" : "border-slate-300"}`}
 						/>
 						{errors.email && (
 							<p className="text-xs text-red-600 mt-1">{errors.email}</p>
@@ -134,9 +141,10 @@ export default function Register() {
 								}
 								placeholder="••••••••"
 								autoComplete="new-password"
-								className={`mt-1 block w-full rounded-lg border px-3 py-2.5 pr-10 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
-									errors.password ? "border-red-300" : "border-slate-300"
-								}`}
+								className={`mt-1 block w-full rounded-lg border px-3 py-2.5 pr-10 
+								placeholder:text-slate-400 focus:outline-none focus:ring-2 
+								focus:ring-blue-400 transition 
+								${errors.password ? "border-red-300" : "border-slate-300"}`}
 							/>
 							<button
 								type="button"
@@ -151,17 +159,20 @@ export default function Register() {
 						)}
 					</div>
 
-					<div className="flex justify-center gap-3 pt-2">
+					{/* SUBMIT BUTTON */}
+					<div className="pt-2">
 						<button
 							type="submit"
 							disabled={loading}
-							className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium shadow-md hover:brightness-105 transition disabled:opacity-60"
+							className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 
+							text-white font-medium shadow-md transition disabled:opacity-60"
 						>
 							{loading ? "Creating..." : "Create Account"}
 						</button>
 					</div>
 				</form>
 
+				{/* FOOTER */}
 				<p className="mt-6 text-center text-sm text-slate-600">
 					Already have an account?{" "}
 					<Link

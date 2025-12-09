@@ -12,7 +12,7 @@ export default function ConfirmModal({
 		<div className="space-y-6">
 			{/* Header */}
 			<div className="flex items-start gap-3">
-				<div className="p-2 rounded-full bg-red-100 text-red-600 flex-shrink-0">
+				<div className="p-2 rounded-full bg-red-100 text-red-600 shrink-0">
 					<FiAlertTriangle size={20} />
 				</div>
 

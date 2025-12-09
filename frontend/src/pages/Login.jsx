@@ -66,74 +66,70 @@ export default function Login() {
 	};
 
 	return (
-		<div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100 px-4 py-10">
+		<div
+			className="min-h-screen flex items-center justify-center 
+		bg-gradient-to-br from-white via-white to-slate-100 px-4"
+		>
 			<motion.div
 				initial={{ opacity: 0, y: 16 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.35 }}
-				className="w-full max-w-md bg-white shadow-xl border border-slate-200 rounded-2xl p-8 sm:p-10"
+				className="w-full max-w-md backdrop-blur-xl bg-white/50 
+				border border-white/60 shadow-xl rounded-2xl p-8 sm:p-10"
 			>
+				{/* HEADER */}
 				<header className="mb-7 text-center">
-					<h1 className="text-3xl font-bold text-slate-900">Welcome Back 👋</h1>
-					<p className="text-sm text-slate-500 mt-1">
+					<h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+						Welcome Back 👋
+					</h1>
+					<p className="text-sm text-slate-600 mt-1">
 						Sign in to access your workspace
 					</p>
 				</header>
 
 				<form onSubmit={submit} className="space-y-5" noValidate>
-					{/* EMAIL */}
+					{/* EMAIL INPUT */}
 					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-slate-700"
-						>
+						<label className="block text-sm font-medium text-slate-700">
 							Email
 						</label>
+
 						<input
-							id="email"
-							name="email"
 							type="email"
-							autoComplete="email"
 							value={form.email}
-							onChange={(e) =>
-								setForm((f) => ({ ...f, email: e.target.value }))
-							}
+							onChange={(e) => setForm({ ...form, email: e.target.value })}
 							placeholder="you@company.com"
-							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
-								errors.email ? "border-red-300" : "border-slate-300"
-							}`}
+							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 
+							placeholder:text-slate-400 focus:outline-none focus:ring-2 
+							focus:ring-blue-400 transition 
+							${errors.email ? "border-red-300" : "border-slate-300"}`}
 						/>
+
 						{errors.email && (
 							<p className="mt-1 text-xs text-red-600">{errors.email}</p>
 						)}
 					</div>
 
-					{/* PASSWORD */}
+					{/* PASSWORD INPUT */}
 					<div className="relative">
-						<label
-							htmlFor="password"
-							className="block text-sm font-medium text-slate-700"
-						>
+						<label className="block text-sm font-medium text-slate-700">
 							Password
 						</label>
+
 						<input
-							id="password"
-							name="password"
 							type={showPassword ? "text" : "password"}
-							autoComplete="current-password"
 							value={form.password}
-							onChange={(e) =>
-								setForm((f) => ({ ...f, password: e.target.value }))
-							}
+							onChange={(e) => setForm({ ...form, password: e.target.value })}
 							placeholder="••••••••"
-							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 pr-10 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
-								errors.password ? "border-red-300" : "border-slate-300"
-							}`}
+							className={`mt-1 block w-full rounded-lg border px-3 py-2.5 pr-10 
+							placeholder:text-slate-400 focus:outline-none focus:ring-2 
+							focus:ring-blue-400 transition 
+							${errors.password ? "border-red-300" : "border-slate-300"}`}
 						/>
 
 						<button
 							type="button"
-							onClick={() => setShowPassword((s) => !s)}
+							onClick={() => setShowPassword(!showPassword)}
 							className="absolute right-3 top-9 text-slate-500 hover:text-slate-700"
 						>
 							{showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
@@ -144,11 +140,14 @@ export default function Login() {
 						)}
 					</div>
 
-					{/* SUBMIT */}
+					{/* SUBMIT BUTTON */}
 					<button
 						type="submit"
 						disabled={auth.loading}
-						className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white py-2.5 font-medium shadow-md transition disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-blue-300"
+						className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 
+						text-white py-2.5 font-medium shadow-lg transition 
+						disabled:opacity-60 focus:outline-none focus:ring-2 
+						focus:ring-blue-300"
 					>
 						{auth.loading ? <Loading inline color="text-black" /> : "Sign in"}
 					</button>

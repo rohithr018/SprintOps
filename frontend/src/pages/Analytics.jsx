@@ -258,32 +258,50 @@ export default function Analytics() {
 	};
 
 	return (
-		<div className="space-y-12 pb-14 px-4 md:px-6 lg:px-10 bg-slate-100 min-h-screen">
-			{/* Header */}
-			<div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl p-5 shadow-sm">
-				<div className="flex items-start gap-3">
-					<div className="p-3 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md">
+		<div
+			className="min-h-screen bg-gradient-to-br from-white via-white to-slate-100 
+		px-4 md:px-6 lg:px-10 py-12 space-y-10"
+		>
+			{/* HEADER */}
+			<div
+				className="
+			flex flex-col md:flex-row items-start md:items-center justify-between gap-6 
+			backdrop-blur-xl bg-white/50 border border-white/60 shadow-xl 
+			rounded-2xl p-6
+		"
+			>
+				<div className="flex items-start gap-4">
+					<div
+						className="p-3 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 
+					text-white shadow-md"
+					>
 						<FiBarChart2 size={22} />
 					</div>
+
 					<div>
-						<h2 className="text-2xl font-semibold text-slate-900">
+						<h2 className="text-2xl font-bold text-slate-900">
 							Analytics Dashboard
 						</h2>
-						<p className="text-xs md:text-sm text-slate-500 mt-1">
+
+						<p className="text-sm text-slate-600 mt-1">
 							Global overview or sprint-level insights — exportable for reviews.
 						</p>
 					</div>
 				</div>
 
-				{/* Toggle + Export + Sprint selector */}
+				{/* CONTROLS */}
 				<div className="flex flex-wrap items-center gap-3 justify-end">
-					{/* Sprint selector */}
+					{/* Sprint Selector */}
 					{view === "sprint" && (
 						<div className="relative">
 							<select
 								value={selectedSprint}
 								onChange={(e) => setSelectedSprint(e.target.value)}
-								className="appearance-none pl-4 pr-9 py-2.5 rounded-xl border border-slate-300 bg-white shadow-sm text-xs md:text-sm text-slate-700 hover:border-slate-400 transition min-w-[160px]"
+								className="
+								appearance-none pl-4 pr-9 py-2.5 rounded-xl border border-slate-300 
+								bg-white/70 shadow-sm text-sm text-slate-700 hover:border-slate-400 
+								transition min-w-[170px] backdrop-blur-xl
+							"
 							>
 								<option value="">Choose sprint</option>
 								{sprints.map((s) => (
@@ -292,23 +310,37 @@ export default function Analytics() {
 									</option>
 								))}
 							</select>
-							<div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+
+							<div
+								className="
+							pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 
+							text-slate-400
+						"
+							>
 								<FiChevronDown className="w-4 h-4" />
 							</div>
 						</div>
 					)}
-					{/* Global / Sprint toggle */}
-					<div className="inline-flex items-center bg-slate-100 rounded-full p-1 shadow-inner">
+
+					{/* Global / Sprint Toggle */}
+					<div
+						className="
+					inline-flex items-center bg-slate-100 rounded-full p-1 shadow-inner
+				"
+					>
 						<button
 							onClick={() => {
 								setView("global");
 								setSelectedSprint("");
 							}}
-							className={`px-5 py-2 text-xs md:text-sm rounded-full transition ${
+							className={`
+							px-5 py-2 rounded-full text-sm transition 
+							${
 								view === "global"
 									? "bg-white shadow text-slate-900"
 									: "text-slate-600 hover:text-slate-800"
-							}`}
+							}
+						`}
 						>
 							Global
 						</button>
@@ -316,36 +348,42 @@ export default function Analytics() {
 						<button
 							onClick={() => {
 								setView("sprint");
-								if (!selectedSprint && sprints.length > 0) {
+								if (!selectedSprint && sprints.length > 0)
 									setSelectedSprint(sprints[0]._id);
-								}
 							}}
-							className={`px-5 py-2 text-xs md:text-sm rounded-full transition ${
+							className={`
+							px-5 py-2 rounded-full text-sm transition 
+							${
 								view === "sprint"
 									? "bg-white shadow text-slate-900"
 									: "text-slate-600 hover:text-slate-800"
-							}`}
+							}
+						`}
 						>
 							Sprint
 						</button>
 					</div>
 
-					{/* Export button */}
+					{/* Export Button */}
 					<button
 						type="button"
 						onClick={handleExport}
-						className="inline-flex items-center gap-2 px-4 py-2 text-xs md:text-sm rounded-full bg-slate-900 text-slate-50 shadow-sm hover:bg-slate-800 active:scale-[0.98] transition disabled:opacity-50 disabled:cursor-not-allowed"
 						disabled={!data || exporting}
+						className="
+						inline-flex items-center gap-2 px-4 py-2 rounded-full 
+						bg-slate-900 text-white shadow-md hover:bg-slate-800 
+						text-sm transition disabled:opacity-50
+					"
 					>
 						<FiDownload className="w-4 h-4" />
-						<span>{exporting ? "Exporting…" : "Export PDF"}</span>
+						{exporting ? "Exporting…" : "Export PDF"}
 					</button>
 				</div>
 			</div>
 
-			{/* Loading */}
+			{/* LOADING STATE */}
 			{loading && (
-				<div className="flex justify-center py-10 text-slate-500 text-sm">
+				<div className="flex justify-center py-14 text-slate-500 text-sm">
 					Loading analytics…
 				</div>
 			)}
@@ -355,7 +393,7 @@ export default function Analytics() {
 				<div
 					ref={chartsRef}
 					data-export-root="true"
-					className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+					className="grid grid-cols-1 lg:grid-cols-2 gap-8"
 				>
 					{/* 1. TASK STATUS */}
 					<Panel title="Task Status" icon={<FiFileText />}>
@@ -565,9 +603,9 @@ export default function Analytics() {
 			)}
 
 			{!loading && !data && (
-				<div className="bg-white border border-slate-200 rounded-xl p-6 text-center text-sm text-slate-500">
-					No analytics yet. Once you log tasks, PRs, and feedback, this page
-					will light up with trends and insights.
+				<div className=" max-w-lg mx-auto text-center backdrop-blur-xl bg-white/50 border border-white/60 rounded-2xl shadow-lg p-8 text-sm text-slate-600">
+					No analytics yet. As you log tasks, PRs, and feedback, insights will
+					appear here.
 				</div>
 			)}
 		</div>

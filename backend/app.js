@@ -45,6 +45,12 @@ app.use("/sprints/:sprintId/prs", prRoutes);
 app.use("/sprints/:sprintId/feedback", feedbackRoutes);
 app.use("/analytics", analyticsRoutes);
 
+app.use((req, res) => {
+	return res.status(403).json({
+		success: false,
+		message: "Access forbidden",
+	});
+});
 app.use(errorHandler);
 
 module.exports = app;

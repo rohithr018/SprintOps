@@ -20,15 +20,25 @@ module.exports = (req, res, next) => {
 		req.userId = decoded.id || decoded._id;
 
 		req.isDemo = decoded.email === DEMO_EMAIL;
+		// if (!req.isDemo && !mongoose.Types.ObjectId.isValid(req.userId)) {
+		// 	return res.status(401).json({
+		// 		success: false,
+		// 		message: "Invalid token payload",
+		// 	});
+		// }
 		if (!req.isDemo && !mongoose.Types.ObjectId.isValid(req.userId)) {
-			return res.status(401).json({
+			return res.status(403).json({
 				success: false,
-				message: "Invalid token payload",
+				message: "Forbidden",
 			});
 		}
 
 		next();
 	} catch (err) {
-		return res.status(401).json({ success: false, message: "Invalid token" });
+		// return res.status(401).json({ success: false, message: "Invalid token" });
+		return res.status(403).json({
+			success: false,
+			message: "Forbidden",
+		});
 	}
 };

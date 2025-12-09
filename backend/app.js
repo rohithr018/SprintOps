@@ -46,9 +46,9 @@ app.use("/sprints/:sprintId/feedback", feedbackRoutes);
 app.use("/analytics", analyticsRoutes);
 
 app.use((req, res) => {
-	return res.status(403).json({
+	return res.status(404).json({
 		success: false,
-		message: "Access forbidden",
+		message: "Route not found",
 	});
 });
 app.use(errorHandler);

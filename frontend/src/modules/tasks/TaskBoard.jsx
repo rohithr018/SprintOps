@@ -28,8 +28,11 @@ export default function TaskBoard({ sprintId }) {
 		try {
 			const res = await taskService.getTasks(sprintId);
 			setTasks(res.data.data || []);
-		} catch {
-			showError("Failed to load tasks");
+		} catch (err) {
+			const msg =
+				err?.response?.data?.message || err?.message || "Failed to load tasks";
+
+			showError(msg);
 		} finally {
 			setLoading(false);
 		}
@@ -39,7 +42,7 @@ export default function TaskBoard({ sprintId }) {
 		load();
 	}, [load]);
 
-	// Recalculate grouped columns
+	// Group by columns
 	useEffect(() => {
 		const g = {};
 		COLUMNS.forEach((c) => (g[c] = []));
@@ -66,9 +69,12 @@ export default function TaskBoard({ sprintId }) {
 
 		try {
 			await taskService.updateTask(sprintId, draggableId, { status: toCol });
-		} catch {
-			showError("Failed to move task");
-			load();
+		} catch (err) {
+			const msg =
+				err?.response?.data?.message || err?.message || "Failed to move task";
+
+			showError(msg);
+			load(); // revert
 		}
 	};
 
@@ -76,35 +82,35 @@ export default function TaskBoard({ sprintId }) {
 
 	return (
 		<div className="space-y-4">
+			{/* Header */}
 			<div className="flex items-center justify-between">
 				<h3 className="text-lg font-semibold">Tasks</h3>
 
 				<button
 					onClick={() => setOpenCreate(true)}
 					className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm hover:brightness-110"
-					title="Add Task"
 				>
 					<FiPlus /> Add
 				</button>
 			</div>
 
+			{/* Columns */}
 			<DragDropContext onDragEnd={onDragEnd}>
-				<div className="h-[45vh]">
-					<div className="grid grid-cols-1 md:grid-cols-4 gap-4 h-full">
-						{COLUMNS.map((col) => (
-							<TaskColumn
-								key={col}
-								columnId={col}
-								title={`${col} (${(grouped[col] || []).length})`}
-								tasks={grouped[col] || []}
-								onView={(task) => setOpenDetails(task)}
-								onEdit={(task) => setOpenEdit(task)}
-							/>
-						))}
-					</div>
+				<div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full h-[50vh] min-h-0 mb-5">
+					{COLUMNS.map((col) => (
+						<TaskColumn
+							key={col}
+							columnId={col}
+							title={`${col} (${(grouped[col] || []).length})`}
+							tasks={grouped[col] || []}
+							onView={(task) => setOpenDetails(task)}
+							onEdit={(task) => setOpenEdit(task)}
+						/>
+					))}
 				</div>
 			</DragDropContext>
 
+			{/* Create Modal */}
 			{openCreate && (
 				<Modal onClose={() => setOpenCreate(false)}>
 					<TaskFormModal
@@ -118,6 +124,7 @@ export default function TaskBoard({ sprintId }) {
 				</Modal>
 			)}
 
+			{/* Details Modal */}
 			{openDetails && (
 				<TaskDetailsModal
 					task={openDetails}
@@ -126,6 +133,7 @@ export default function TaskBoard({ sprintId }) {
 				/>
 			)}
 
+			{/* Edit Modal */}
 			{openEdit && (
 				<Modal onClose={() => setOpenEdit(null)}>
 					<TaskFormModal

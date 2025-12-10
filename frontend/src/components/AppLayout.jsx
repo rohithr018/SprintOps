@@ -1,4 +1,3 @@
-// src/layouts/AppLayout.jsx
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
